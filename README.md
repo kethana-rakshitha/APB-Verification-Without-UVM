@@ -1,12 +1,12 @@
 # APB Protocol Verification Using SystemVerilog (Without UVM)
 
-## Project Overview
+## 1. Project Overview
 
 This project implements a verification environment for an AMBA APB (Advanced Peripheral Bus) slave using SystemVerilog and a class-based testbench, without using the UVM framework.
 
 The testbench verifies read and write transactions, checks returned data against a reference model, applies protocol assertions, and measures functional coverage.
 
-## Objectives
+## 2. Project Objectives
 
 - Understand and verify the APB protocol.
 - Generate randomized read and write transactions.
@@ -16,7 +16,7 @@ The testbench verifies read and write transactions, checks returned data against
 - Check protocol behavior using SystemVerilog Assertions.
 - Measure functional coverage across read/write operations and addresses.
 
-## Verification Architecture
+## 3. Verification Architecture
 
 The testbench consists of the following components:
 
@@ -29,7 +29,40 @@ The testbench consists of the following components:
 - **Assertions:** Check selected APB protocol requirements.
 - **Functional Coverage:** Measures read/write operations and address combinations.
 
-## Design Under Test
+### Verification Flow
+
+```text id="8p2zbx"
+Randomized Transactions
+          |
+          v
+       Generator
+          |
+          v
+        Mailbox
+          |
+          v
+         Driver
+          |
+          v
+       APB Slave
+          |
+          v
+        Monitor
+          |
+          v
+        Mailbox
+          |
+          v
+      Scoreboard <---- Reference Model
+          |
+          v
+ Expected vs Actual
+          |
+          v
+       PASS / FAIL
+```
+
+## 4. Design Under Test
 
 The APB slave contains four 8-bit registers mapped to these addresses:
 
@@ -42,7 +75,7 @@ The APB slave contains four 8-bit registers mapped to these addresses:
 
 The slave supports register reads and writes, provides a ready response, and indicates invalid addresses through `PSLVERR`.
 
-## Simulation Results
+## 5. Simulation Results
 
 Simulation was performed using QuestaSim 10.7c.
 
@@ -55,26 +88,26 @@ Simulation was performed using QuestaSim 10.7c.
 
 **Note:** The scoreboard's PASS counter counts successful read comparisons only. Writes update the reference model but do not increment PASS. Functional coverage represents the bins defined in this testbench.
 
-## Waveform
-
-Click below to view the APB simulation waveform:
-
-[**View APB Waveform**](apb_waveform.png)
-
-![APB waveform](apb_waveform.png)
+## 6. Simulation Waveform
 
 The waveform displays the clock, reset, APB control signals, address, write data, and read data.
 
-## Tools and Technologies
+![APB Simulation Waveform](APB_Verification_waveform.jpeg)
+
+[**View Full-Size APB Waveform**](APB_Verification_waveform.jpeg)
+
+## 7. Tools and Technologies
 
 - SystemVerilog
 - QuestaSim 10.7c
-- Class-based verification
+- Class-Based Verification
 - SystemVerilog Assertions (SVA)
 - Functional Coverage
+- Mailbox-Based Communication
+- Scoreboard-Based Checking
 - GitHub
 
-## Key Learning Outcomes
+## 8. Key Learning Outcomes
 
 - Building a modular class-based verification environment without UVM.
 - Understanding APB setup and access phases.
@@ -83,17 +116,17 @@ The waveform displays the clock, reset, APB control signals, address, write data
 - Writing protocol assertions and functional coverage.
 - Analyzing simulation logs and waveforms.
 
-## Future Improvements
+## 9. Future Improvements
 
 - Add directed tests for invalid addresses and error responses.
 - Improve transaction completion and end-of-test synchronization.
 - Extend protocol assertions and coverage goals.
 - Compare this approach with a separate APB UVM verification environment.
 
-[**View APB Waveform**](APB_Verification_waveform.jpeg)
-
-![APB Simulation Waveform](APB_Verification_waveform.jpeg)
-
 ## Author
 
+**Kethana Rakshitha**
+
 Electronics and Communication Engineering Student | VLSI Design Verification
+
+GitHub: [kethana-rakshitha](https://github.com/kethana-rakshitha)
