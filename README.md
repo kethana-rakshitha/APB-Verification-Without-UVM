@@ -90,6 +90,10 @@ The waveform displays the clock, reset, APB control signals, address, write data
 - Extend protocol assertions and coverage goals.
 - Compare this approach with a separate APB UVM verification environment.
 
+[**View APB Waveform**](APB_Verification_waveform.jpeg)
+
+![APB Simulation Waveform](APB_Verification_waveform.jpeg)
+
 ## Author
 
 Electronics and Communication Engineering Student | VLSI Design Verification
